@@ -295,9 +295,21 @@ h1.faded {
   }
 
   .search-box {
-      max-width: 70%;
+    display: flex;
+    max-width: 60%;
+    align-items: center; /* Ensure all children are centered vertically */
   }
-
+  
+  .search-box input {
+    flex: 1; /* Take up the remaining space */
+  }
+  
+  .search-box button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .navbar-links {
     justify-content: space-around;
     display: none;
