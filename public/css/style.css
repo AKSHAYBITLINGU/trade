@@ -297,7 +297,8 @@ h1.faded {
   } */
   .search-box {
     display: flex;
-    max-width: 60%;
+    width: 100%;
+    max-width: none;
     align-items: center;
     flex-wrap: wrap;
   }
