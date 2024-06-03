@@ -302,7 +302,10 @@ h1.faded {
     align-items: center;
     flex-wrap: wrap;
   }
-  
+  #logo{
+    margin-left: -10px;
+    margin-right: 5px;
+  }
   .row {
     display: flex;
     align-items: center;
