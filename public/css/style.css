@@ -299,12 +299,14 @@ h1.faded {
     display: flex;
     max-width: 60%;
     align-items: center;
+    flex-wrap: wrap;
   }
   
   .row {
     display: flex;
     align-items: center;
     flex-grow: 1;
+    flex-basis: 100%;
   }
   
   #input-box {
