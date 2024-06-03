@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buyers Platform</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="top-row">
+        <div id="logo">
+          <a href="/"><img src="/images/logo.png" alt="Logo" /></a>
+          <span>TRADE</span>
+        </div>
+        <div class="search-box">
+          <div class="row">
+            <input
+              type="text"
+              id="input-box"
+              placeholder="Search Anything..."
+              autocomplete="off"
+            />
+            <button>
+              <img class="searchimage" src="/images/loupe.png" alt="Search" />
+            </button>
+          </div>
+          <div class="result-box"></div>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/sell">Sell</a></li>
+        <li><a href="/about">About</a></li>
+        <li id="phonebtn">
+          <a href="/contact"
+            ><img src="/images/phone-call.png" alt="Phone"
+          /></a>
+        </li>
+        <li id="cartbtn">
+          <a href="/cart"><img src="/images/shopping-cart.png" alt="Cart" /></a>
+        </li>
+        <% if (isLoggedIn) { %>
+        <li id="phonebtn">
+          <a href="/profile"><img src="/images/user.png" alt="User" /></a>
+        </li>
+        <% } else { %>
+        <li><a href="/login">Login</a></li>
+        <% } %>
+      </ul>
+    </nav>
+    <div class="deals-section">
+      <a href="/deals"><h2>Grab The Deals</h2></a>
+    </div>
+    <div class="categories">
+      <% if (Array.isArray(categories)) { %> <% categories.forEach(category => {
+      %>
+      <div class="category-box">
+        <img
+          src="/images/<%= category.image %>.jpg"
+          alt="<%= category.name %>"
+        />
+        <h3><%= category.name %></h3>
+        <a href="/c/<%= category.name %>">See More</a>
+      </div>
+      <% }) %> <% } else { %>
+      <p>No categories available</p>
+      <% } %>
+    </div>
+  </body>
+  <script src="/js/categoryscript.js"></script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+  <h1><%= subcategoryName %></h1>
+  <!-- <div class="categories">
+    <% for (const product of products) { %>
+      <div class="category-box">
+        <div class="background-fade"></div>
+        <img src="/images/subcategories/<%= categoryName %>/<%= subcategoryName %>/<%= product.image %>.jpg" alt="<%= product.name %>">
+        <h3><%= product.name %></h3>
+        <h3>Quantity Available: <%= product.quantity %></h3>
+        <h3>Price: <%= product.price %> per kg</h3>
+        <button 
+            data-product-id="<%= product.id %>"
+            data-product-name="<%= product.name.replace(/['"]/g, '') %>"
+            data-product-image="/images/subcategories/<%= categoryName %>/<%= subcategoryName %>/<%= product.image %>.jpg"
+            data-product-price="<%= product.price %>"
+            data-product-quantity="<%= product.quantity %>"
+            onclick="handleAddToCart(this)">
+            Add To Cart
+        </button>
+        <button class="notify-when-available" onclick="notifyWhenAvailable(this)" style="display: block;">Notify me When Available</button>
+      </div>
+    <% } %>
+  </div> -->
+  <div class="categories">
+    <% for (const product of products) { %>
+      <div class="category-box">
+        <div class="background-fade"></div>
+        <img id="<%= product.name %>" src="/images/<%= product.image %>.jpg" alt="<%= product.name %>">
+        <h3><%= product.name %></h3>
+        <h3>Quantity Available: <%= product.quantity %></h3>
+        <h3>Price: <%= product.price %> per kg</h3>
+        
+        <!-- If quantity is zero, hide or disable "Add to Cart" -->
+        <button 
+          data-product-id="<%= product.id %>"
+          data-product-name="<%= product.name.replace(/['"]/g, '') %>"
+          data-product-image="/images/<%= product.image %>.jpg"
+          data-product-price="<%= product.price %>"
+          data-product-quantity="<%= product.quantity %>"
+          onclick="handleAddToCart(this)"
+          style="<%= product.quantity === 0 ? 'display: none;' : '' %>"> <!-- Hide if zero quantity -->
+          Add To Cart
+        </button>
+        
+        <!-- Show "Notify When Available" button if out of stock -->
+        <button 
+          class="notify-when-available" 
+          onclick="notifyWhenAvailable(this)"
+          data-product-id="<%= product.id %>"
+          style="<%= product.quantity === 0 ? 'display: block;' : 'display: none;' %>"> <!-- Show if zero quantity -->
+          Notify Me
+        </button>
+      </div>
+    <% } %>
+  </div>  
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span> <!-- Close button -->
+      <input type="hidden" id="product-id" name="product-id">
+      <h2 id="product-name"></h2>
+      <img id="product-image" src="" alt="Product Image" style="max-width: 100%;">
+      <p>Price: <span id="product-price"></span></p>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" oninput="updateTotal()" required>
+      <p>Total Price: <span id="total-price"></span></p>
+      <% if (isLoggedIn) { %>
+        <button onclick="addToCart()" id="product-modal button">Add To Cart</button>
+      <% } else { %>
+        <button onclick="GoToLogin()" id="product-modal button">Login</button>
+      <% } %>
+      <button onclick="GoToCart()" id="product-modal button">Go To Cart</button>
+    </div>
+  </div>
+  <script src="/js/productscript.js"></script>
+</body>
+</html>

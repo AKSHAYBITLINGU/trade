@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Orders</title>
+  <link rel="stylesheet" href="/css/myorders.css"> <!-- Link to your stylesheet -->
+</head>
+<body>
+  <!-- Navigation Menu -->
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/myorders">My Orders</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Orders Section -->
+  <div class="orders-container">
+    <h1>My Orders</h1>
+    <!-- Check if there are any orders -->
+    <% if (orders.length === 0) { %>
+      <p>You have no orders yet.</p>
+    <% } else { %>
+      <ul>
+        <!-- Loop through the orders and display each one -->
+        <% orders.forEach((order) => { %>
+          <li>
+            <strong>Order ID:</strong> <%= order._id %><br>
+            <strong>Product:</strong> <%= order.productName %> (Quantity: <%= order.quantity %>)<br>
+            <strong>Price:</strong> $<%= order.price %><br>
+            <strong>Date:</strong> <%= order.createdAt.toLocaleDateString() %>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+  </footer>
+</body>
+</html>

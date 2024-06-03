@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/css/profile.css"> <!-- Link to your stylesheet -->
+</head>
+<body>
+  <!-- Navigation Menu -->
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/myorders">My Orders</a></li>
+      <!-- Form-based logout for POST request -->
+      <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" style="background: none; border: none; cursor: pointer; color: inherit; text-decoration: underline;">
+          Logout
+        </button>
+      </form>
+    </ul>
+  </nav>
+
+  <!-- User Profile Section -->
+  <div class="profile-container">
+
+    <!-- Profile Picture -->
+    <!-- <div class="profile-picture">
+      <% if (user.profilePic) { %>
+        <img src="<%= user.profilePic %>" alt="Profile Picture">
+      <% } else { %>
+        <img src="/images/default-profile-pic.jpg" alt="Default Profile Picture"> 
+      <% } %>
+    </div> -->
+    <div class="profile-picture">
+      <% if (user.profilePic && user.profilePic.data) { %>
+        <img src="data:<%= user.profilePic.contentType %>;base64,<%= user.profilePic.data.toString('base64') %>" alt="Profile Picture">
+      <% } else { %>
+        <img src="/images/Che_Guevara.jpg" alt="Default Profile Picture">
+      <% } %>
+    </div>
+    
+    
+
+    <!-- User Information -->
+    <div class="user-info">
+      <h2>Name: <%= user.username %></h2>
+      <p>Phone: <%= user.phone %></p>
+      <p>Email: <%= user.email ? user.email : 'Not provided' %></p>
+      <p>Address: <%= user.address ? user.address : 'Not provided' %></p>
+      <p>Gender: <%= user.gender ? user.gender : 'Not provided' %></p>
+
+      <!-- Edit Profile Button -->
+      <button onclick="editProfile()">Edit Profile</button>
+    </div>
+
+    <!-- Sell or Not -->
+    <div class="sell-status">
+      <p>Seller Status: <%= user.isSeller ? 'Seller' : 'Not a Seller' %></p>
+      <% if (!user.isSeller) { %>
+        <button onclick="applyToSell()">Apply to Sell</button> <!-- Option to become a seller -->
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Interactive Elements -->
+  <script>
+    function editProfile() {
+      // Redirect to the profile edit page or open a modal
+      window.location.href = "/profile/edit"; // Modify this as needed
+    }
+
+    function applyToSell() {
+      // Logic for applying to become a seller
+      alert("Applying to become a seller...");
+    }
+  </script>
+</body>
+</html>

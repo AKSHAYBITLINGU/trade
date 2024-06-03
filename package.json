@@ -1,0 +1,33 @@
+{
+  "name": "projectbuyers",
+  "version": "1.0.0",
+  "description": "A Platform for Both Buyers and Sellers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "postinstall": "npm rebuild bcrypt"
+  },
+  "engines": {
+    "node": "20.11.1" 
+  },
+  "author": "Akshay Bitlingu",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "gridfs-stream": "^1.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.4.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.0",
+    "twilio": "^5.0.4"
+  }
+}

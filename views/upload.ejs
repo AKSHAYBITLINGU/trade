@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Form</title>
+  </head>
+  <body>
+    <h2>Select an option:</h2>
+    <input
+      type="checkbox"
+      id="categoryCheckbox"
+      name="option"
+      value="category"
+    />
+    <label for="categoryCheckbox">Category</label><br />
+    <input
+      type="checkbox"
+      id="subcategoryCheckbox"
+      name="option"
+      value="subcategory"
+    />
+    <label for="subcategoryCheckbox">Subcategory</label><br />
+    <input type="checkbox" id="productCheckbox" name="option" value="product" />
+    <label for="productCheckbox">Product</label><br />
+
+    <div id="formContainer"></div>
+
+    <script>
+      const formContainer = document.getElementById("formContainer");
+
+      // Function to show form based on selected option
+      function showForm(option) {
+        formContainer.innerHTML = ""; // Clear previous form
+
+        if (option === "category") {
+          formContainer.innerHTML = `
+                    <h3>Add New Category</h3>
+                    <form id="categoryForm" action="/upload/document" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="option" value="category">
+                        <label for="categoryName">Category Name:</label>
+                        <input type="text" id="categoryName" name="categoryName"><br>
+                        <label for="categoryImage">Category Image:</label>
+                        <input type="file" id="categoryImage" name="image"><br>
+                        <button type="submit">Upload</button>
+                    </form>
+                `;
+        } else if (option === "subcategory") {
+          formContainer.innerHTML = `
+                    <h3>Add New Subcategory</h3>
+                    <form id="subcategoryForm" action="/upload/document" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="option" value="subcategory">
+                        <label for="subcategoryName">Subcategory Name:</label>
+                        <input type="text" id="subcategoryName" name="subcategoryName"><br>
+                        <label for="subcategoryImage">Subcategory Image:</label>
+                        <input type="file" id="subcategoryImage" name="image"><br>
+                        <label for="category">Select Category:</label>
+                        <select id="category" name="category">
+                            <option value="category1">Category 1</option>
+                            <option value="category2">Category 2</option>
+                            <!-- Add more options dynamically from database if needed -->
+                        </select><br>
+                        <button type="submit">Upload</button>
+                    </form>
+                `;
+        } else if (option === "product") {
+          formContainer.innerHTML = `
+                    <h3>Add New Product</h3>
+                    <form id="productForm" action="/upload/document" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="option" value="product">
+                        <label for="productName">Product Name:</label>
+                        <input type="text" id="productName" name="productName"><br>
+                        <label for="productImage">Product Image:</label>
+                        <input type="file" id="productImage" name="image"><br>
+                        <label for="subcategory">Select Subcategory:</label>
+                        <select id="subcategory" name="subcategory">
+                            <option value="subcategory1">Subcategory 1</option>
+                            <option value="subcategory2">Subcategory 2</option>
+                            <!-- Add more options dynamically from database if needed -->
+                        </select><br>
+                        <label for="price">Price:</label>
+                        <input type="number" id="price" name="price"><br>
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity"><br>
+                        <label for="deal">Is Deal:</label>
+                        <input type="checkbox" id="deal" name="deal"><br>
+                        <label for="dealDescription">Deal Description:</label>
+                        <input type="text" id="dealDescription" name="dealDescription"><br>
+                        <button type="submit">Upload</button>
+                    </form>
+                `;
+        }
+      }
+
+      // Event listener for checkbox change
+      const checkboxes = document.querySelectorAll('input[name="option"]');
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            showForm(this.value);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
