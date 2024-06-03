@@ -288,11 +288,13 @@ h1.faded {
   }
   .search-box {
     display: grid;
-    grid-template-columns: 1fr auto; /* One fraction for input, auto for button */
+    grid-template-columns: 1fr auto; 
     max-width: 60%;
-    align-items: center; /* Ensure all children are centered vertically */
+    align-items: center; 
   }
-  
+  .search-box .row {
+    flex-direction: row-reverse;
+  }
   .navbar-links {
     justify-content: space-around;
     display: none;
