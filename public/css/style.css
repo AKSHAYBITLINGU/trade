@@ -158,13 +158,6 @@ button .searchimage {
   color: #333;
 }
 
-.deals-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
 h1 {
   text-align: center;
   font-size: 3rem;
@@ -293,21 +286,11 @@ h1.faded {
     margin-bottom: 10px;
     border-bottom: 1px solid white;
   }
-
   .search-box {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto; /* One fraction for input, auto for button */
     max-width: 60%;
     align-items: center; /* Ensure all children are centered vertically */
-  }
-  
-  .search-box input {
-    flex: 1; /* Take up the remaining space */
-  }
-  
-  .search-box button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   
   .navbar-links {
@@ -317,6 +300,7 @@ h1.faded {
   }
 
   .navbar-links ul {
+    padding: 0 10px;
       width: 100%;
       flex-direction: row;
   }
@@ -327,6 +311,12 @@ h1.faded {
 
   .navbar-links ul li a {
       padding: .5rem 1rem;
+  }
+  .deals-section{
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    padding: 8px 0;
   }
 
 }
