@@ -286,7 +286,7 @@ h1.faded {
     margin-bottom: 10px;
     border-bottom: 1px solid white;
   }
-  .search-box {
+  /* .search-box {
     display: grid;
     grid-template-columns: 1fr auto; 
     max-width: 60%;
@@ -294,7 +294,24 @@ h1.faded {
   }
   .search-box .row {
     flex-direction: row-reverse;
+  } */
+  .search-box {
+    display: flex;
+    max-width: 60%;
+    align-items: center;
   }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  #input-box {
+    flex-grow: 1;
+  }
+  
+  
   .navbar-links {
     justify-content: space-around;
     display: none;
