@@ -1,53 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buyers Platform</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   </head>
   <body>
-    <nav class="navbar">
-      <div class="top-row">
-        <div id="logo">
-          <a href="/"><img src="/images/logo.png" alt="Logo" /></a>
-          <span>TRADE</span>
-        </div>
-        <div class="search-box">
-          <div class="row">
-            <input
-              type="text"
-              id="input-box"
-              placeholder="Search Anything..."
-              autocomplete="off"
-            />
-            <button>
-              <img class="searchimage" src="/images/loupe.png" alt="Search" />
-            </button>
-          </div>
-          <div class="result-box"></div>
-        </div>
+    <nav>
+      <div class="menu-icon">
+         <span class="fas fa-bars"></span>
       </div>
-      <ul class="nav-links">
+      <div class="logo">
+         TRADE
+      </div>
+      <div class="nav-items">
+        <li><a href="/">Home</a></li>
         <li><a href="/sell">Sell</a></li>
         <li><a href="/about">About</a></li>
         <li id="phonebtn">
-          <a href="/contact"
-            ><img src="/images/phone-call.png" alt="Phone"
-          /></a>
+            <a href="/contact"><img src="/images/phone-call.png" alt="Phone" /></a>
         </li>
         <li id="cartbtn">
-          <a href="/cart"><img src="/images/shopping-cart.png" alt="Cart" /></a>
+            <a href="/cart"><img src="/images/shopping-cart.png" alt="Cart" /></a>
         </li>
         <% if (isLoggedIn) { %>
-        <li id="phonebtn">
-          <a href="/profile"><img src="/images/user.png" alt="User" /></a>
+        <li id="profilebtn">
+            <a href="/profile"><img src="/images/user.png" alt="User" /></a>
         </li>
         <% } else { %>
         <li><a href="/login">Login</a></li>
         <% } %>
+      </div>
+      <div class="search-icon">
+         <span class="fas fa-search"></span>
+      </div>
+      <div class="cancel-icon">
+         <span class="fas fa-times"></span>
+      </div>
+      <div class="search-box">
+        <input
+          class="search-data"
+          type="text"
+          id="input-box"
+          placeholder="Search Anything..."
+          autocomplete="off"
+        />
+        <!-- <button>
+          <img class="searchimage" src="/images/loupe.png" alt="Search" />
+        </button> -->
+        <button id="searchbutton" class="fas fa-search"></button>
+        <div class="result-box"></div>
+      </div>
+      <!-- <div class="form">
+         <input type="search" class="search-data" id="input-box" placeholder="Search" required>
+         <button id="searchbutton" class="fas fa-search"></button>
+         <div class="result-box"></div>
+      </div> -->
+   </nav>
+    <!-- <nav class="navbar">
+      <div class="top-row">
+          <div id="menu-icon">
+              <img src="/images/menu.png" alt="Menu" />
+          </div>
+          <div id="logo">
+              <a href="/"><img src="/images/logo.png" alt="Logo" /></a>
+              <span>TRADE</span>
+          </div>
+          <div id="search-icon">
+              <img src="/images/loupe.png" alt="Search" />
+          </div>
+      </div>
+      <div class="search-box">
+          <div class="row">
+              <input type="text" id="input-box" placeholder="Search Anything..." autocomplete="off" />
+              <button id="close-search">
+                  <img class="searchimage" src="/images/close.png" alt="Close" />
+              </button>
+          </div>
+      </div>
+      <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/sell">Sell</a></li>
+          <li><a href="/about">About</a></li>
+          <li id="phonebtn">
+              <a href="/contact"><img src="/images/phone-call.png" alt="Phone" /></a>
+          </li>
+          <li id="cartbtn">
+              <a href="/cart"><img src="/images/shopping-cart.png" alt="Cart" /></a>
+          </li>
+          <% if (isLoggedIn) { %>
+          <li id="profilebtn">
+              <a href="/profile"><img src="/images/user.png" alt="User" /></a>
+          </li>
+          <% } else { %>
+          <li><a href="/login">Login</a></li>
+          <% } %>
       </ul>
-    </nav>
+  </nav> -->
     <div class="deals-section">
       <a href="/deals"><h2>Grab The Deals</h2></a>
     </div>

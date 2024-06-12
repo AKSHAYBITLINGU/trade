@@ -162,31 +162,31 @@ const Category = require("./models/categories");
 const SubCategory = require("./models/subcategories");
 const Product = require("./models/product");
 
-// app.post("/upload/document", upload.single("image"), async (req, res) => {
-//   const { option } = req.body;
+app.post("/upload/document", async (req, res) => {
+  const { option } = req.body;
 
-//   try {
-//     if (option === "category") {
-//       const { categoryName } = req.body;
-//       const category = new Category({
-//         name: categoryName,
-//         image: req.file.filename,
-//         subcategories: [],
-//       });
-//       await category.save();
-//       res.send("Category uploaded successfully");
-//     } else if (option === "subcategory") {
-//       // Handle subcategory form submission
-//     } else if (option === "product") {
-//       // Handle product form submission
-//     } else {
-//       res.status(400).send("Invalid option");
-//     }
-//   } catch (error) {
-//     console.error("Error uploading:", error);
-//     res.status(500).send("Server Error");
-//   }
-// });
+  try {
+    if (option === "category") {
+      const { categoryName } = req.body;
+      const category = new Category({
+        name: categoryName,
+        image: req.file.filename,
+        subcategories: [],
+      });
+      await category.save();
+      res.send("Category uploaded successfully");
+    } else if (option === "subcategory") {
+      // Handle subcategory form submission
+    } else if (option === "product") {
+      // Handle product form submission
+    } else {
+      res.status(400).send("Invalid option");
+    }
+  } catch (error) {
+    console.error("Error uploading:", error);
+    res.status(500).send("Server Error");
+  }
+});
 
 app.post("/signup", async (req, res) => {
   const { username, password, phone } = req.body;
