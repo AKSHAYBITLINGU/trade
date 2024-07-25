@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <h1><%= categoryName %></h1>
+    <!-- <h1><%= categoryName %></h1> -->
+    <%- include('components/HomeNavBar') -%>
     <div class="categories">
       <% for (const subcategory of subcategories) { %>
       <div class="category-box">
@@ -15,8 +16,10 @@
           src="/images/<%= subcategory.image %>.jpg"
           alt="<%= subcategory.name %>"
         />
-        <h3><%= subcategory.name %></h3>
-        <a href="/c/<%= categoryName %>/<%= subcategory.name %>">See More</a>
+        <!-- <h3><%= subcategory.name %></h3> -->
+        <a href="/c/<%= categoryName %>/<%= subcategory.name %>"
+          ><%= subcategory.name %></a
+        >
       </div>
       <% } %>
     </div>

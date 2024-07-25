@@ -1,0 +1,44 @@
+<%- include('checkoutheader') -%>
+
+<div class="order-complete-container">
+  <h1>Thank You for Your Order!</h1>
+  <p>
+    Your order has been successfully placed. You will receive a confirmation
+    email shortly.
+  </p>
+
+  <div class="order-summary">
+    <h2>Order Summary</h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orderItems.forEach(item => { %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.price.toFixed(2) %></td>
+          <td><%= (item.price * item.quantity).toFixed(2) %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="order-total">
+      <p><strong>Total:</strong> $<%= totalPrice.toFixed(2) %></p>
+    </div>
+  </div>
+
+  <div class="order-actions">
+    <a href="/" class="btn">Back to Home</a>
+    <a href="/myorders" class="btn">View Orders</a>
+  </div>
+</div>
+
+<%- include('checkoutfooter') -%>

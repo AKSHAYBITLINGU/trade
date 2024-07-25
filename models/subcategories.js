@@ -11,6 +11,10 @@ subcategorySchema.statics.getAllSubCategoryNames = async function() {
     return await this.distinct('name');
 };
 
+subcategorySchema.statics.getAllProducts = async function(subcategoryId) {
+    return await this.findById(subcategoryId).populate('products').exec();
+};
+
 const SubCategory = mongoose.model('SubCategory', subcategorySchema);
 
 module.exports = SubCategory;

@@ -13,9 +13,9 @@
             <div class="background-fade"></div>
             <img id="<%= product.name %>" src="/images/<%= product.image %>.jpg" alt="<%= product.name %>">
             <h3><%= product.name %></h3>
-            <h3>Quantity Available: <%= product.quantity %></h3>
+            <h3>Quantity: <%= product.quantity %></h3>
             <h3>Price: <%= product.price %> per kg</h3>
-            <h3>dealDescription: <%= product.deal.dealDescription %></h3>
+            <h3>deal: <%= product.deal.dealDescription %></h3>
             <button 
               data-product-id="<%= product.id %>"
               data-product-name="<%= product.name.replace(/['"]/g, '') %>"

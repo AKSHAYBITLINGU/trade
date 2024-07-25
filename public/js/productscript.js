@@ -1,3 +1,52 @@
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for Add to Cart buttons
+  var addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+  addToCartButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      handleAddToCart(button);
+    });
+  });
+
+  // Add event listeners for Notify Me buttons
+  var notifyButtons = document.querySelectorAll('.notify-when-available-button');
+  notifyButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      notifyWhenAvailable(button);
+    });
+  });
+
+  var closeModalButton = document.getElementById('close-modal');
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', function() {
+            closeModal();
+        });
+    }
+
+  var goToLoginButton = document.getElementById('go-to-login-button');
+  if (goToLoginButton) {
+      goToLoginButton.addEventListener('click', function() {
+          GoToLogin();
+      });
+  }
+
+  var goToCartButton = document.getElementById('go-to-cart-button');
+  if (goToCartButton) {
+      goToCartButton.addEventListener('click', function() {
+        closeModal();
+          GoToCart();
+      });
+  }
+
+     // Quantity input change event
+  var quantityInput = document.getElementById('quantity');
+  if (quantityInput) {
+    quantityInput.addEventListener('input', function() {
+      updateTotal();
+    });
+  }
+});
 function handleAddToCart(button) {
   const productId = button.getAttribute("data-product-id");
   const productName = button.getAttribute("data-product-name");
@@ -24,15 +73,15 @@ function openModal(
   productPrice,
   productQuantity
 ) {
+
   const modal = document.getElementById("product-modal");
   modal.style.display = "block"; // Show the modal
 
   // Set product details in the modal
   document.getElementById("product-id").value = productId;
   document.getElementById("product-name").textContent = productName;
-  document.getElementById("product-image").src = `${productImage}`;
-  document.getElementById("product-price").textContent =
-    productPrice.toFixed(2);
+  document.getElementById("product-image").src = `/images/${productImage}.jpg`;
+  document.getElementById("product-price").textContent = productPrice.toFixed(2);
 
   // Set initial total price based on default quantity
   const quantity = parseInt(document.getElementById("quantity").value, 10);
@@ -55,45 +104,14 @@ function updateTotal() {
   const totalPrice = productPrice * quantity;
   document.getElementById("total-price").textContent = totalPrice.toFixed(2);
 }
-//   function addToCart() {
-//     var button = document.querySelector('#product-modal button');
-//     button.textContent = 'Added To Cart';
-//     button.style.backgroundColor = 'green';
 
-//     const productId = document.getElementById('product-id').value;
-//     const productName = document.getElementById('product-name').textContent;
-//     const productImage = document.getElementById('product-image').src;
-//     const productPrice = parseFloat(document.getElementById('product-price').textContent);
-//     const quantity = parseInt(document.getElementById('quantity').value, 10);
-//     const totalPrice = productPrice * quantity;
+var addToCartButtonModel = document.querySelector("#product-modal button:first-of-type");
+addToCartButtonModel.addEventListener('click', function() {
+  addToCart();
+});
 
-//     // AJAX request to add the product to cart.json
-//     fetch('/cart/add', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         id:productId,
-//         name: productName,
-//         price: productPrice,
-//         image: productImage,
-//         quantity: quantity,
-//         total_price: totalPrice,
-//       }),
-//     })
-//       .then(response => {
-//         if (response.ok) {
-//           console.log('Product added to cart.');
-//         } else {
-//           console.error('Failed to add product to cart.');
-//         }
-//       })
-//       .catch(error => {
-//         console.error('Error adding product to cart:', error);
-//       });
-//   }
 function addToCart() {
+
   const button = document.querySelector("#product-modal button:first-of-type");
   button.disabled = true;
 

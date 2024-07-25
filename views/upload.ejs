@@ -36,29 +36,30 @@
         if (option === "category") {
           formContainer.innerHTML = `
                     <h3>Add New Category</h3>
-                    <form id="categoryForm" action="/upload/document" method="post" enctype="multipart/form-data">
+                    <form id="categoryForm" action="/upload/document" method="post">
                         <input type="hidden" name="option" value="category">
                         <label for="categoryName">Category Name:</label>
                         <input type="text" id="categoryName" name="categoryName"><br>
+                        <label for="categoryImageName">Category Image Name:</label>
+                        <input type="text" id="categoryImageName" name="categoryImageName"><br>
                         <label for="categoryImage">Category Image:</label>
-                        <input type="file" id="categoryImage" name="image"><br>
                         <button type="submit">Upload</button>
                     </form>
                 `;
         } else if (option === "subcategory") {
           formContainer.innerHTML = `
                     <h3>Add New Subcategory</h3>
-                    <form id="subcategoryForm" action="/upload/document" method="post" enctype="multipart/form-data">
+                    <form id="subcategoryForm" action="/upload/document" method="post">
                         <input type="hidden" name="option" value="subcategory">
                         <label for="subcategoryName">Subcategory Name:</label>
                         <input type="text" id="subcategoryName" name="subcategoryName"><br>
-                        <label for="subcategoryImage">Subcategory Image:</label>
-                        <input type="file" id="subcategoryImage" name="image"><br>
+                        <label for="subcategoryImageName">Subcategory Image Name:</label>
+                        <input type="text" id="subcategoryImageName" name="subcategoryImageName"><br>
                         <label for="category">Select Category:</label>
                         <select id="category" name="category">
-                            <option value="category1">Category 1</option>
-                            <option value="category2">Category 2</option>
-                            <!-- Add more options dynamically from database if needed -->
+                            <% categories.forEach(item => { %>
+                            <option value="<%= item %>"><%= item %></option>
+                            <% }); %>
                         </select><br>
                         <button type="submit">Upload</button>
                     </form>
@@ -66,26 +67,24 @@
         } else if (option === "product") {
           formContainer.innerHTML = `
                     <h3>Add New Product</h3>
-                    <form id="productForm" action="/upload/document" method="post" enctype="multipart/form-data">
+                    <form id="productForm" action="/upload/document" method="post">
                         <input type="hidden" name="option" value="product">
+                        <label for="productId">Product Id:</label>
+                        <input type="number" id="productId" name="productId"><br>
                         <label for="productName">Product Name:</label>
                         <input type="text" id="productName" name="productName"><br>
-                        <label for="productImage">Product Image:</label>
-                        <input type="file" id="productImage" name="image"><br>
+                        <label for="productImageName">Product Image Name:</label>
+                        <input type="text" id="productImageName" name="productImageName"><br>
                         <label for="subcategory">Select Subcategory:</label>
                         <select id="subcategory" name="subcategory">
-                            <option value="subcategory1">Subcategory 1</option>
-                            <option value="subcategory2">Subcategory 2</option>
-                            <!-- Add more options dynamically from database if needed -->
+                          <% subcategories.forEach(item => { %>
+                            <option value="<%= item %>"><%= item %></option>
+                          <% }); %>
                         </select><br>
                         <label for="price">Price:</label>
                         <input type="number" id="price" name="price"><br>
                         <label for="quantity">Quantity:</label>
                         <input type="number" id="quantity" name="quantity"><br>
-                        <label for="deal">Is Deal:</label>
-                        <input type="checkbox" id="deal" name="deal"><br>
-                        <label for="dealDescription">Deal Description:</label>
-                        <input type="text" id="dealDescription" name="dealDescription"><br>
                         <button type="submit">Upload</button>
                     </form>
                 `;

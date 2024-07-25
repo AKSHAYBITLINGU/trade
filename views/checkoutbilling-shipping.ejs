@@ -1,0 +1,214 @@
+<%- include('checkoutheader') -%>
+<!-- <form
+  action="/billing-shipping"
+  method="post"
+  class="form"
+  id="billing-shipping-form"
+  novalidate
+>
+  <div>
+    <div>
+      <h2>Billing information</h2>
+      <div>
+        <input
+          type="text"
+          name="billing_first_name"
+          id="billing_first_name"
+          placeholder="Full name"
+          value="<%= user.username %>"
+        />
+      </div>
+      <div>
+        <input
+          type="email"
+          name="billing_email"
+          id="billing_email"
+          placeholder="E-mail"
+          value="<%= user.email %>"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          name="billing_phone"
+          id="billing_phone"
+          placeholder="Phone"
+          value="<%= user.phone %>"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          name="billing_address"
+          id="billing_address"
+          placeholder="Address"
+          value="<%= user.address %>"
+        />
+      </div>
+    </div>
+
+    <div>
+      <h2>Shipping information</h2>
+      <div>
+        <label for="same-as"
+          ><input type="checkbox" name="same_as" id="same-as" value="1" />Same
+          as billing</label
+        >
+      </div>
+      <div>
+        <div>
+          <input
+            type="text"
+            name="shipping_first_name"
+            id="shipping_first_name"
+            placeholder="Full name"
+            value="<%= user.username %>"
+          />
+        </div>
+        <div>
+          <input
+            type="email"
+            name="shipping_email"
+            id="shipping_email"
+            placeholder="E-mail"
+            value="<%= user.email %>"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="shipping_phone"
+            id="shipping_phone"
+            placeholder="Phone"
+            value="<%= user.phone %>"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="shipping_address"
+            id="shipping_address"
+            placeholder="Address"
+            value="<%= user.address %>"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>
+    <input type="submit" class="btn" value="Save" />
+  </p>
+</form> -->
+<form
+  action="/billing-shipping"
+  method="post"
+  class="form"
+  id="billing-shipping-form"
+  novalidate
+>
+  <div class="form-section">
+    <div class="billing-info">
+      <h2>Billing Information</h2>
+      <div class="form-group">
+        <input
+          type="text"
+          name="billing_first_name"
+          id="billing_first_name"
+          class="form-control"
+          placeholder="Full Name"
+          value="<%= user.username %>"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          name="billing_email"
+          id="billing_email"
+          class="form-control"
+          placeholder="E-mail"
+          value="<%= user.email %>"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="billing_phone"
+          id="billing_phone"
+          class="form-control"
+          placeholder="Phone"
+          value="<%= user.phone %>"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="billing_address"
+          id="billing_address"
+          class="form-control address"
+          placeholder="Address"
+          value="<%= user.address %>"
+        />
+      </div>
+    </div>
+
+    <div class="shipping-info">
+      <h2>Shipping Information</h2>
+      <div class="form-group">
+        <label for="same-as">
+          <input
+            type="checkbox"
+            name="same_as"
+            id="same-as"
+            class="form-checkbox"
+            value="1"
+          />
+          Same as billing
+        </label>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="shipping_first_name"
+          id="shipping_first_name"
+          class="form-control"
+          placeholder="Full Name"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          name="shipping_email"
+          id="shipping_email"
+          class="form-control"
+          placeholder="E-mail"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="shipping_phone"
+          id="shipping_phone"
+          class="form-control"
+          placeholder="Phone"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          name="shipping_address"
+          id="shipping_address"
+          class="form-control address"
+          placeholder="Address"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="form-control-btn">
+    <p>
+      <input type="submit" class="btn" value="Save" />
+    </p>
+    <a href="/checkout/payment">Next</a>
+  </div>
+</form>
+
+<%- include('checkoutfooter') -%>

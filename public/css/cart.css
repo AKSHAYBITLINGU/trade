@@ -12,12 +12,20 @@ h1 {
   margin-bottom: 20px; /* Spacing below the heading */
 }
 
+.cart-section {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  width: 100%;
+}
+
 /* Cart items styling */
 .cart-items {
   display: flex;
   flex-direction: column; /* Stack cart items vertically */
   align-items: center; /* Center align cart items */
   gap: 10px; /* Spacing between cart items */
+  width: 70%;
 }
 
 /* Individual cart item styling */
@@ -27,11 +35,23 @@ h1 {
   padding: 10px; /* Padding within each cart item */
   border-radius: 5px; /* Rounded corners */
   background-color: white; /* White background */
-  max-width: 600px; /* Maximum width for responsiveness */
-  width: 80%;
+  width: 60%;
   height: 160px; /* Fixed width for each cart item */
 }
+/* Close button styling */
+.remove span {
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s ease-in-out;
+  align-items: start;
+}
 
+.remove span:hover {
+  color: #555;
+}
 /* Cart image styling */
 .cart-image {
   width: 150px; /* Fixed width for the image */
@@ -48,7 +68,7 @@ h1 {
   display: flex;
   flex-direction: column; /* Stack details vertically */
   justify-content: center; /* Align items vertically */
-  text-align:center; 
+  text-align: center;
   gap: 4px; /* Reduced vertical spacing between elements */
   padding: 0;
 }
@@ -57,26 +77,83 @@ h1 {
 .cart-item-details p {
   margin: 6px 0; /* Reduced vertical margin */
 }
-/* Styling for total cost display */
-.cart-total {
-  margin-top: 20px; /* Margin above the total */
-  text-align: center; /* Center the text */
+cart-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+.price-details {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 100%;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.price-details-heading h2 {
+  margin: 0;
+}
+.price-details-left,
+.price-details-right {
+  margin: 5px;
+}
+
+.price-details-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 2px solid black;
+  padding: 10px;
+}
+/* Styling for total cost display */
+.cart-total {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-items: left;
+  margin-top: 5px;
+  gap: 5px;
+  border-top: 2px solid black;
+  padding: 10px;
+  background-color: white;
+  width: 100%;
+}
+.cart-total-left,
+.cart-total-right {
+  padding: 10px;
+}
+
+.cart-total h3 {
+  margin: 0;
+}
 /* Flexbox for controlling layout of buttons */
 .cart-controls {
   display: flex;
   flex-direction: row; /* Flex layout */
   justify-content: center; /* Center align */
   gap: 10px; /* Space between buttons */
-  margin-top: 20px; /* Space between cart items and buttons */
+  border-top: 2px solid black;
+  padding: 10px;
+  background-color: white;
+  width: 100%;
 }
 
 /* Link styling for "Continue Shopping" */
 .shopping-button {
   text-decoration: none; /* No underline */
-  color: #333; /* Darker text color */
-  background-color: #f0f0f0; /* Light background */
+  color: white;
+  background-color: green; /* Light background */
   padding: 10px 20px; /* Padding */
   border-radius: 5px; /* Rounded corners */
   transition: background-color 0.3s; /* Smooth transition */
@@ -100,10 +177,14 @@ h1 {
 }
 
 /* Responsive design for smaller screens */
-@media (max-width: 800px){
-  .cart-items{
+@media (max-width: 800px) {
+  .cart-section {
+    flex-direction: column; /* Stack items vertically */
+  }
+  .cart-items {
     margin: 0;
     padding: 0;
+    width: 100%;
   }
   .cart-item {
     width: 100%;

@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const Product  = require("../models/product");
+const Product = require("../models/product");
 const User = require("../models/user");
 const checkAuth = require("../middlewares/checkAuth");
 const mongoose = require("mongoose");
@@ -33,9 +33,20 @@ router.get("/", async (req, res) => {
     }
 
     const cartItems = user.cart; // Get the cart items
+    let totalQuantity = 0;
+    let totalPrice = 0;
 
+    cartItems.forEach((item) => {
+      totalQuantity += item.quantity;
+      totalPrice += item.quantity * item.price;
+    });
     // Render the cart view with the cart items
-    res.render("cart", { cartItems, isLoggedIn: res.locals.isLoggedIn });
+    res.render("cart", {
+      cartItems,
+      isLoggedIn: res.locals.isLoggedIn,
+      totalQuantity,
+      totalPrice,
+    });
   } catch (error) {
     console.error("Error fetching user cart:", error);
     return res.status(500).send("Internal Server Error"); // Handle server errors
@@ -155,7 +166,7 @@ router.post("/add", async (req, res) => {
       return res.status(404).send("User not found"); // Handle user not found case
     }
 
-    const product = await Product.findOne({ "id": id });
+    const product = await Product.findOne({ id: id });
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -166,8 +177,8 @@ router.post("/add", async (req, res) => {
         .json({ message: "Insufficient quantity in stock" });
     }
 
-    product.quantity -= quantity; // Decrease stock
-    await product.save();
+    // product.quantity -= quantity; // Decrease stock
+    // await product.save();
 
     let cart = user.cart;
     let existingItem = cart.find((item) => item.id == id);

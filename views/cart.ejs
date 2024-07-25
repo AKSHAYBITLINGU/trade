@@ -5,43 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="/css/cart.css" />
-    <!-- Link to the external stylesheet -->
   </head>
   <body>
     <h1>My Cart</h1>
-
-    <div class="cart-items">
-      <% if (cartItems.length === 0) { %>
-      <p>Your cart is currently empty.</p>
-      <% } else { %> <% let totalCost = 0; %> <% for (const item of cartItems) {
-      %>
-      <div class="cart-item">
-        <img
-          src="<%= item.image %>"
-          alt="<%= item.name %>"
-          class="cart-image"
-        />
-        <div class="cart-item-details">
-          <h3><%= item.name %></h3>
-          <p>Price: <%= item.price %></p>
-          <p>Quantity: <%= item.quantity %></p>
-          <p>Subtotal: <%= (item.price * item.quantity).toFixed(2) %></p>
+    <div class="cart-section">
+      <div class="cart-items">
+        <% if (cartItems.length === 0) { %>
+        <p>Your cart is currently empty.</p>
+        <% } else { %> <% let totalCost = 0; %> <% for (const item of cartItems)
+        { %>
+        <div class="cart-item">
+          <img
+            src="<%= item.image %>"
+            alt="<%= item.name %>"
+            class="cart-image"
+          />
+          <div class="cart-item-details">
+            <h3><%= item.name %></h3>
+            <p>Price: <%= item.price %></p>
+            <p>Quantity: <%= item.quantity %></p>
+            <p>Subtotal: <%= (item.price * item.quantity).toFixed(2) %></p>
+          </div>
+          <div class="remove">
+            <span id="remove-item">&times;</span>
+          </div>
         </div>
-        <% totalCost += item.price * item.quantity; %>
+        <% } %> <% } %>
       </div>
-      <% } %>
-      <div class="cart-total">
-        <h3>Total Cost: <%= totalCost.toFixed(2) %></h3>
-      </div>
-      <% } %>
-    </div>
-
-    <div class="cart-controls">
-      <!-- Flexbox to align buttons -->
+      <% if (cartItems.length === 0) { %>
       <a href="/" class="shopping-button">Continue Shopping</a>
-      <% if (cartItems.length > 0) { %>
-      <a href="/checkout" class="shopping-button">Checkout</a>
-      <% } %>
+      <% }else { %>
+      <div class="cart-pricing">
+        <div class="price-details">
+          <div class="price-details-heading">
+            <h2>Price Details</h2>
+          </div>
+          <div class="price-details-info">
+            <div class="price-details-left">
+              <p>Total MRP</p>
+              <p>Discount</p>
+              <p>Coupon</p>
+              <p>Platform Fee</p>
+              <p>Shipping Fee</p>
+            </div>
+            <div class="price-details-right">
+              <p><%= totalPrice %></p>
+              <p>-<%= 0 %></p>
+              <p>-<%= 0 %></p>
+              <p><%= 0 %></p>
+              <p><%= 0 %></p>
+            </div>
+          </div>
+        </div>
+        <div class="cart-total">
+          <div class="cart-total-left">
+            <h3>Total quantity</h3>
+            <h3>Total</h3>
+          </div>
+          <div class="cart-total-right">
+            <h3><%= totalQuantity %></h3>
+            <h3><%= totalPrice %></h3>
+          </div>
+        </div>
+        <div class="cart-controls">
+          <a href="/" class="shopping-button">Continue Shopping</a>
+          <% if (cartItems.length > 0) { %>
+          <a href="/checkout" class="shopping-button">Checkout</a>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
     </div>
   </body>
+  <script src="/js/cartscript.js"></script>
 </html>

@@ -16,6 +16,7 @@ require("dotenv").config();
 const secretKey = process.env.JWT_SECRET_KEY;
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+
 const uri = process.env.uri;
 const port = process.env.PORT;
 //connection
@@ -72,7 +73,6 @@ const port = process.env.PORT;
 //     console.log("Connected to MongoDB!");
 // });
 
-
 //let gfs;
 
 // mongoose.connection.once("open", () => {
@@ -105,8 +105,8 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl: uri, 
-      collectionName: "sessions", 
+      mongoUrl: uri,
+      collectionName: "sessions",
     }),
   })
 );
@@ -130,10 +130,11 @@ app.use(checkAuth); // Use the checkAuth middleware for all routes
 const usersFilePath = path.join(__dirname, "users.json");
 
 // Define routes (refer to separate files)
+const HomePageRouter = require("./routes/categories");
 const checkoutRouter = require("./routes/checkout");
 const uploadRouter = require("./routes/upload");
 const dealsRouter = require("./routes/deals");
-const indexRouter = require("./routes/category");
+const indexRouter = require("./routes/homepage");
 const cartRoute = require("./routes/cart");
 const loginRoute = require("./routes/login");
 const signupRoute = require("./routes/signup");
@@ -144,6 +145,7 @@ const profileRouter = require("./routes/profile");
 const myordersRouter = require("./routes/myorders");
 const apidataRouter = require("./routes/apidata");
 
+app.use("/cat", HomePageRouter);
 app.use("/checkout", checkoutRouter);
 app.use("/upload", uploadRouter);
 app.use("/deals", dealsRouter);
@@ -161,32 +163,6 @@ app.use("/", indexRouter);
 const Category = require("./models/categories");
 const SubCategory = require("./models/subcategories");
 const Product = require("./models/product");
-
-app.post("/upload/document", async (req, res) => {
-  const { option } = req.body;
-
-  try {
-    if (option === "category") {
-      const { categoryName } = req.body;
-      const category = new Category({
-        name: categoryName,
-        image: req.file.filename,
-        subcategories: [],
-      });
-      await category.save();
-      res.send("Category uploaded successfully");
-    } else if (option === "subcategory") {
-      // Handle subcategory form submission
-    } else if (option === "product") {
-      // Handle product form submission
-    } else {
-      res.status(400).send("Invalid option");
-    }
-  } catch (error) {
-    console.error("Error uploading:", error);
-    res.status(500).send("Server Error");
-  }
-});
 
 app.post("/signup", async (req, res) => {
   const { username, password, phone } = req.body;
@@ -216,7 +192,7 @@ app.post("/login", async (req, res) => {
     if (user && (await user.comparePassword(password))) {
       // Generate JWT token
       const token = jwt.sign({ userId: user._id }, secretKey, {
-        expiresIn: "1h",
+        expiresIn: "24h",
       });
       // Set a secure cookie with the JWT token
       res.cookie("jwtToken", token, { httpOnly: true, maxAge: 3600000 });

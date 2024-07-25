@@ -1,6 +1,4 @@
 const express = require("express");
-const path = require("path");
-const fs = require("fs");
 const router = express.Router();
 const Category = require("../models/categories");
 const SubCategory = require("../models/subcategories");
@@ -21,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/c/:categoryName", async (req, res) => {
+router.get("/:categoryName", async (req, res) => {
   const categoryName = req.params.categoryName;
 
   try {
@@ -44,7 +42,7 @@ router.get("/c/:categoryName", async (req, res) => {
   }
 });
 
-router.get("/c/:categoryName/:subcategoryName", async (req, res) => {
+router.get("/:categoryName/:subcategoryName", async (req, res) => {
   const { categoryName, subcategoryName } = req.params;
 
   try {
