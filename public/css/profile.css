@@ -23,7 +23,17 @@ nav {
 nav ul {
   list-style-type: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul form button {
+  text-decoration: none;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  padding: 5px;
+  font-size: 20px;
 }
 
 nav a {

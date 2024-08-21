@@ -1,83 +1,40 @@
-let sliderlist = document.querySelector(".home-slider .images-list");
-let imgitems = document.querySelectorAll(".home-slider .images-list .img-item");
-let sliderdots = document.querySelectorAll(".home-slider .slider-dots li");
-let sliderprevbtn = document.getElementById("slider-prev-btn");
-let slidernextbtn = document.getElementById("slider-next-btn");
+document.addEventListener("DOMContentLoaded", () => {
+  const categorySelect = document.getElementById("category");
+  const videoItems = document.querySelectorAll(".video-item");
 
-let active = 0;
-let ItemsLength = imgitems.length - 1;
+  categorySelect.addEventListener("change", function () {
+    const selectedCategory = this.value;
 
-slidernextbtn.onclick = function () {
-  if (active + 1 > ItemsLength) {
-    active = 0;
-  } else {
-    active += 1;
-  }
-  reloadslider();
-};
-
-sliderprevbtn.onclick = function () {
-  if (active - 1 < 0) {
-    active = ItemsLength;
-  } else {
-    active -= 1;
-  }
-  reloadslider();
-};
-
-function reloadslider() {
-  let checkleft = imgitems[active].offsetLeft;
-  sliderlist.style.left = -checkleft + "px";
-
-  let LastActiveDot = document.querySelector(
-    ".home-slider .slider-dots li.active"
-  );
-  LastActiveDot.classList.remove("active");
-  sliderdots[active].classList.add("active");
-}
-
-sliderdots.forEach((li, key) => {
-  li.addEventListener("click", function () {
-    active = key;
-    reloadslider();
+    videoItems.forEach((item) => {
+      const itemCategory = item.getAttribute("data-category");
+      if (selectedCategory === "" || itemCategory === selectedCategory) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
   });
 });
 
-let RefreshSlider = setInterval(() => {
-  slidernextbtn.click();
-}, 5000);
-
-// Banner JS
-function changeColors() {
-  const SaleText = document.getElementById("sale-text");
-  const IsText = document.getElementById("is-text");
-  const liveText = document.getElementById("live-text");
-
-  const colors = [
-    "#FF5733",
-    "#33FF57",
-    "#3357FF",
-    "#F0E68C",
-    "#FF69B4",
-    "#8A2BE2",
-  ];
-
-  let saleindex = 0;
-  let isindex = 1;
-  let liveindex = 2;
-
-  setInterval(() => {
-    SaleText.style.color = colors[saleindex];
-    IsText.style.color = colors[isindex];
-    liveText.style.color = colors[liveindex];
-
-    saleindex = (saleindex + 1) % colors.length;
-    isindex = (isindex + 1) % colors.length;
-    liveindex = (liveindex + 1) % colors.length;
-  }, 500);
+function getVideoId(url) {
+  const regex =
+    /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
 }
 
-changeColors();
+function getThumbnail() {
+  const url = document.getElementById("videoUrl").value;
+  const videoId = getVideoId(url);
+  if (videoId) {
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    document.getElementById("thumbnailContainer").innerHTML = `
+          <img src="${thumbnailUrl}" alt="YouTube Thumbnail">
+      `;
+  } else {
+    document.getElementById("thumbnailContainer").innerHTML = "Invalid URL";
+  }
+}
 
 async function collectDataFromAPI() {
   try {
@@ -230,3 +187,68 @@ searchBtn.onclick = () => {
   searchBtn.classList.add("hide");
   cancelBtn.classList.add("show");
 };
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const videoList = document.getElementById("video-list");
+  const sortSelect = document.getElementById("sort");
+  const filterSelect = document.getElementById("filter");
+  const searchInput = document.getElementById("search");
+
+  let videos = [];
+
+  const fetchVideos = async () => {
+    try {
+      const response = await fetch("/api/videos");
+      videos = await response.json();
+      sortFilterAndSearchVideos();
+    } catch (err) {
+      console.error("Failed to fetch videos:", err);
+    }
+  };
+
+  const renderVideos = (videosToRender) => {
+    videoList.innerHTML = "";
+    videosToRender.forEach((video) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="${video.link}" target="_blank">${video.title}</a>`;
+      videoList.appendChild(li);
+    });
+  };
+
+  const sortFilterAndSearchVideos = () => {
+    const sortCriteria = sortSelect.value;
+    const filterCriteria = filterSelect.value;
+    const searchCriteria = searchInput.value.toLowerCase();
+
+    let filteredVideos = videos;
+
+    if (filterCriteria !== "all") {
+      filteredVideos = videos.filter(
+        (video) => video.category === filterCriteria
+      );
+    }
+
+    if (searchCriteria) {
+      filteredVideos = filteredVideos.filter((video) =>
+        video.title.toLowerCase().includes(searchCriteria)
+      );
+    }
+
+    const sortedVideos = filteredVideos.sort((a, b) => {
+      if (sortCriteria === "title") {
+        return a.title.localeCompare(b.title);
+      } else if (sortCriteria === "date") {
+        return new Date(a.date) - new Date(b.date);
+      }
+    });
+
+    renderVideos(sortedVideos);
+  };
+
+  sortSelect.addEventListener("change", sortFilterAndSearchVideos);
+  filterSelect.addEventListener("change", sortFilterAndSearchVideos);
+  searchInput.addEventListener("input", sortFilterAndSearchVideos);
+
+  // Initial fetch and render
+  await fetchVideos();
+});

@@ -430,6 +430,82 @@ nav .logo.space{
   font-family: "Montserrat", sans-serif;
 }
 
+.home-slider {
+  width: 1300px;
+  max-width: 100vw;
+  height: 700px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.images-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  width: max-content;
+  transition: 0.5s;
+}
+
+.images-list img {
+  width: 1300px;
+  max-width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-btns {
+  position: absolute;
+  top: 45%;
+  left: 5%;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider-btns button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: #fff5;
+  color: #fff;
+  font-family: monospace;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.slider-dots li {
+  list-style: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 20px;
+  background-color: black;
+  margin: 20px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.slider-dots li.active {
+  width: 30px;
+}
+
+/*==============================================*/
+
 #cartbtn img {
   height: 20px;
   width: 20px;
@@ -766,21 +842,76 @@ nav .logo.space {
   color: #333;
 }
 
-h1 {
-  text-align: center;
-  font-size: 3rem;
-  color: #333;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.5s;
-}
-
 body {
   position: relative;
   background-color: #f2f2f2;
 }
 
-h1.faded {
-  opacity: 0.2;
+/* Home Sale Banner Styles ==========================*/
+.home-banner {
+  height: 100px;
+  width: 100%;
+  background-color: #bed8d4;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-banner .banner-text {
+  display: flex;
+  gap: 30px;
+}
+.home-banner .banner-text p {
+  font-size: 100px;
+  margin: 0;
+}
+
+/* ==================================== */
+
+.side-heading {
+  display: block;
+  color: black;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  font-size: 50px;
+}
+
+.categories-all {
+  display: flex;
+  flex-direction: column;
+  background-color: #e5dce1;
+  padding: 20px 0;
+  border-radius: 5px;
+  align-items: center;
+  max-width: 100%;
+  width: 100%;
+}
+
+.upperheading {
+  font-size: 20px;
+  color: #ffa69e;
+  font-family: "Heebo", sans-serif;
+}
+
+.side-heading {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  margin: 20px 10px;
+}
+.categories-explore {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.products-explore {
+  display: flex;
+  flex-direction: column;
+  background-color: #e7ebee;
+  padding: 10px 0;
+  border-radius: 5px;
 }
 
 .categories {
@@ -798,7 +929,10 @@ h1.faded {
   overflow: hidden;
   transition: transform 0.3s;
 }
-
+.home-cat-box {
+  width: 400px;
+  height: 400px;
+}
 .category-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
@@ -810,8 +944,12 @@ h1.faded {
 
 .category-box img {
   width: 100%;
-  height: 200px;
   object-fit: cover;
+  height: 200px;
+}
+
+.home-cat-box img {
+  height: 350px;
 }
 
 .category-box h3 {
@@ -822,6 +960,7 @@ h1.faded {
 
 .category-box a {
   display: block;
+  height: 50px;
   text-align: center;
   padding: 10px 0;
   background-color: #333;
@@ -868,12 +1007,6 @@ h1.faded {
   color: #fff;
 }
 
-/* @media screen and (max-width: 768px) {
-  .category-box {
-    width: 45%; 
-  }
-}
-*/
 @media (max-width: 768px) {
   .categories {
     margin: 0;
@@ -881,10 +1014,20 @@ h1.faded {
   .category-box {
     width: 45%;
     margin: 5px 6px;
+    height: 300px;
+  }
+  .category-box img {
+    height: 250px;
   }
 }
+
+.see-all-btn-control {
+  display: flex;
+  justify-content: right;
+  margin-right: 30px;
+  margin-top: 10px;
+}
 .see-all-btn {
-  display: block;
   align-items: right;
   padding: 10px 20px;
   background-color: #007bff;
@@ -898,13 +1041,7 @@ h1.faded {
   background-color: #0056b3;
 }
 
-.side-heading {
-  display: block;
-  background-color: #333;
-  color: white;
-  margin-top: 30px;
-  margin-bottom: 5px;
-}
+/* cards stying ----------------------------------------------*/
 
 .card-section {
   display: flex;
@@ -941,7 +1078,7 @@ h1.faded {
   font-size: 14px;
 }
 
-/* Footer styles */
+/* Footer styles ----------------------------------------------*/
 .footer {
   background-color: #333;
   padding: 10px;

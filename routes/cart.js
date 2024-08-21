@@ -53,6 +53,78 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.delete("/delete-item/:itemId", async (req, res) => {
+  if (!res.locals.isLoggedIn) {
+    return res.redirect("/login");
+  }
+  if (!req.user || !req.user.userId) {
+    console.error("Error: req.user or req.user._id is undefined");
+    return res.redirect("/login");
+  }
+
+  const userId = req.user.userId;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+  const { itemId } = req.params;
+
+  try {
+    await User.updateOne(
+      { _id: userId },
+      { $pull: { cart: { id: parseInt(itemId, 10) } } }
+    );
+    res.status(200).json({ message: "Item deleted successfully." });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete item." });
+  }
+});
+
+router.put("/update-item/:itemId", async (req, res) => {
+  if (!res.locals.isLoggedIn) {
+    return res.redirect("/login");
+  }
+  if (!req.user || !req.user.userId) {
+    console.error("Error: req.user or req.user._id is undefined");
+    return res.redirect("/login");
+  }
+
+  const userId = req.user.userId;
+  const { itemId } = req.params;
+  const { quantity } = req.body;
+
+  console.log(
+    `Updating item ${itemId} to quantity ${quantity} for user ${userId}`
+  );
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      console.error("User not found");
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const itemIndex = user.cart.findIndex(
+      (item) => item.id === parseInt(itemId, 10)
+    );
+    if (itemIndex === -1) {
+      console.error("Item not found in user's cart");
+      return res.status(404).json({ error: "Item not found in cart" });
+    }
+
+    user.cart[itemIndex].quantity = quantity;
+    await user.save();
+
+    console.log("Item quantity updated successfully");
+    res.status(200).json({ message: "Item quantity updated successfully." });
+  } catch (error) {
+    console.error("Failed to update item quantity:", error);
+    res.status(500).json({ error: "Failed to update item quantity." });
+  }
+});
+
 // router.post('/add', (req, res) => {
 //   const { id, name, price, image, quantity, total_price } = req.body;
 //   // Read products.json to update product quantity

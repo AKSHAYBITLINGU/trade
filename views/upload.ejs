@@ -3,10 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/upload.css" />
     <title>Upload Form</title>
   </head>
   <body>
     <h2>Select an option:</h2>
+    <input
+      type="checkbox"
+      id="TrainingVideoCheckbox"
+      name="option"
+      value="TrainingVideo"
+    />
+    <label for="TrainingVideoCheckbox">TrainingVideo</label><br />
     <input
       type="checkbox"
       id="categoryCheckbox"
@@ -35,59 +43,81 @@
 
         if (option === "category") {
           formContainer.innerHTML = `
-                    <h3>Add New Category</h3>
-                    <form id="categoryForm" action="/upload/document" method="post">
-                        <input type="hidden" name="option" value="category">
-                        <label for="categoryName">Category Name:</label>
-                        <input type="text" id="categoryName" name="categoryName"><br>
-                        <label for="categoryImageName">Category Image Name:</label>
-                        <input type="text" id="categoryImageName" name="categoryImageName"><br>
-                        <label for="categoryImage">Category Image:</label>
+                          <h3>Add New Category</h3>
+                          <form id="categoryForm" action="/upload/document" method="post">
+                              <input type="hidden" name="option" value="category">
+                              <label for="categoryName">Category Name:</label>
+                              <input type="text" id="categoryName" name="categoryName"><br>
+                              <label for="categoryImageName">Category Image Name:</label>
+                              <input type="text" id="categoryImageName" name="categoryImageName"><br>
+                              <label for="categoryImage">Category Image:</label>
+                              <button type="submit">Upload</button>
+                          </form>
+                      `;
+        } else if (option === "TrainingVideo") {
+          formContainer.innerHTML = `
+                    <h3>Add New Training Video</h3>
+                    <form id="trainingVideoForm" action="/upload/document" method="post">
+                        <input type="hidden" name="option" value="trainingVideo">
+                        <label for="videoId">Video Id:</label>
+                        <input type="text" id="videoId" name="videoId"><br>
+                        <label for="videoTitle">Video Title:</label>
+                        <input type="text" id="videoTitle" name="videoTitle"><br>
+                        <label for="videoCategory">Video Category:</label>
+                        <select id="videoCategory" name="videoCategory">
+                            <% categories.forEach(item => { %>
+                                  <option value="<%= item %>"><%= item %></option>
+                                  <% }); %>
+                        </select><br>
+                        <label for="videoDescription">Video Description:</label>
+                        <textarea id="videoDescription" name="videoDescription"></textarea><br>
+                        <label for="videoUrl">Video URL:</label>
+                        <input type="text" id="videoUrl" name="videoUrl"><br>
                         <button type="submit">Upload</button>
                     </form>
                 `;
         } else if (option === "subcategory") {
           formContainer.innerHTML = `
-                    <h3>Add New Subcategory</h3>
-                    <form id="subcategoryForm" action="/upload/document" method="post">
-                        <input type="hidden" name="option" value="subcategory">
-                        <label for="subcategoryName">Subcategory Name:</label>
-                        <input type="text" id="subcategoryName" name="subcategoryName"><br>
-                        <label for="subcategoryImageName">Subcategory Image Name:</label>
-                        <input type="text" id="subcategoryImageName" name="subcategoryImageName"><br>
-                        <label for="category">Select Category:</label>
-                        <select id="category" name="category">
-                            <% categories.forEach(item => { %>
-                            <option value="<%= item %>"><%= item %></option>
-                            <% }); %>
-                        </select><br>
-                        <button type="submit">Upload</button>
-                    </form>
-                `;
+                          <h3>Add New Subcategory</h3>
+                          <form id="subcategoryForm" action="/upload/document" method="post">
+                              <input type="hidden" name="option" value="subcategory">
+                              <label for="subcategoryName">Subcategory Name:</label>
+                              <input type="text" id="subcategoryName" name="subcategoryName"><br>
+                              <label for="subcategoryImageName">Subcategory Image Name:</label>
+                              <input type="text" id="subcategoryImageName" name="subcategoryImageName"><br>
+                              <label for="category">Select Category:</label>
+                              <select id="category" name="category">
+                                  <% categories.forEach(item => { %>
+                                  <option value="<%= item %>"><%= item %></option>
+                                  <% }); %>
+                              </select><br>
+                              <button type="submit">Upload</button>
+                          </form>
+                      `;
         } else if (option === "product") {
           formContainer.innerHTML = `
-                    <h3>Add New Product</h3>
-                    <form id="productForm" action="/upload/document" method="post">
-                        <input type="hidden" name="option" value="product">
-                        <label for="productId">Product Id:</label>
-                        <input type="number" id="productId" name="productId"><br>
-                        <label for="productName">Product Name:</label>
-                        <input type="text" id="productName" name="productName"><br>
-                        <label for="productImageName">Product Image Name:</label>
-                        <input type="text" id="productImageName" name="productImageName"><br>
-                        <label for="subcategory">Select Subcategory:</label>
-                        <select id="subcategory" name="subcategory">
-                          <% subcategories.forEach(item => { %>
-                            <option value="<%= item %>"><%= item %></option>
-                          <% }); %>
-                        </select><br>
-                        <label for="price">Price:</label>
-                        <input type="number" id="price" name="price"><br>
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity"><br>
-                        <button type="submit">Upload</button>
-                    </form>
-                `;
+                          <h3>Add New Product</h3>
+                          <form id="productForm" action="/upload/document" method="post">
+                              <input type="hidden" name="option" value="product">
+                              <label for="productId">Product Id:</label>
+                              <input type="number" id="productId" name="productId"><br>
+                              <label for="productName">Product Name:</label>
+                              <input type="text" id="productName" name="productName"><br>
+                              <label for="productImageName">Product Image Name:</label>
+                              <input type="text" id="productImageName" name="productImageName"><br>
+                              <label for="subcategory">Select Subcategory:</label>
+                              <select id="subcategory" name="subcategory">
+                                <% subcategories.forEach(item => { %>
+                                  <option value="<%= item %>"><%= item %></option>
+                                <% }); %>
+                              </select><br>
+                              <label for="price">Price:</label>
+                              <input type="number" id="price" name="price"><br>
+                              <label for="quantity">Quantity:</label>
+                              <input type="number" id="quantity" name="quantity"><br>
+                              <button type="submit">Upload</button>
+                          </form>
+                      `;
         }
       }
 
@@ -96,7 +126,14 @@
       checkboxes.forEach((checkbox) => {
         checkbox.addEventListener("change", function () {
           if (this.checked) {
+            checkboxes.forEach((cb) => {
+              if (cb !== this) {
+                cb.checked = false;
+              }
+            });
             showForm(this.value);
+          } else {
+            formContainer.innerHTML = ""; // Clear the form if no checkbox is selected
           }
         });
       });

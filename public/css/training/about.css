@@ -1,0 +1,83 @@
+/* about.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1em 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2em;
+}
+
+.logo {
+  font-size: 1.5em;
+}
+
+.nav-items {
+  list-style: none;
+  display: flex;
+  gap: 1em;
+}
+
+.nav-items li {
+  margin: 0;
+}
+
+.nav-items a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-items a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 2em;
+}
+
+.intro,
+.our-team,
+.mission {
+  margin-bottom: 2em;
+}
+
+.intro h1,
+.our-team h2,
+.mission h2 {
+  color: #333;
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 1em;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

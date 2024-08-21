@@ -14,20 +14,41 @@
         <p>Your cart is currently empty.</p>
         <% } else { %> <% let totalCost = 0; %> <% for (const item of cartItems)
         { %>
-        <div class="cart-item">
-          <img
-            src="<%= item.image %>"
-            alt="<%= item.name %>"
-            class="cart-image"
-          />
-          <div class="cart-item-details">
-            <h3><%= item.name %></h3>
-            <p>Price: <%= item.price %></p>
-            <p>Quantity: <%= item.quantity %></p>
-            <p>Subtotal: <%= (item.price * item.quantity).toFixed(2) %></p>
+        <div class="cart-item" id="_<%=item.id%>">
+          <div class="cart-item-main">
+            <div class="item-image">
+              <img
+                src="<%= item.image %>"
+                alt="<%= item.name %>"
+                class="cart-image"
+              />
+            </div>
+            <div class="cart-item-details">
+              <h3><%= item.name %></h3>
+              <p class="item-price">Price: <%= item.price %></p>
+              <p class="item-quantity">Quantity: <%= item.quantity %></p>
+              <p class="item-subtotal">
+                Subtotal: <%= (item.price * item.quantity).toFixed(2) %>
+              </p>
+            </div>
           </div>
-          <div class="remove">
-            <span id="remove-item">&times;</span>
+          <div class="cart-item-control">
+            <button class="remove-item" id="<%= item.id %>">Remove</button>
+            <button class="edit-item" id="edit_<%= item.id %>">Edit</button>
+          </div>
+          <div
+            class="edit-controls"
+            id="edit-controls_<%= item.id %>"
+            style="display: none"
+          >
+            <input
+              type="number"
+              class="quantity-input"
+              value="<%= item.quantity %>"
+            />
+            <button class="update-item" id="update_<%= item.id %>">
+              Update
+            </button>
           </div>
         </div>
         <% } %> <% } %>
@@ -50,8 +71,8 @@
             </div>
             <div class="price-details-right">
               <p><%= totalPrice %></p>
-              <p>-<%= 0 %></p>
-              <p>-<%= 0 %></p>
+              <p><%= 0 %></p>
+              <p><%= 0 %></p>
               <p><%= 0 %></p>
               <p><%= 0 %></p>
             </div>
@@ -63,8 +84,8 @@
             <h3>Total</h3>
           </div>
           <div class="cart-total-right">
-            <h3><%= totalQuantity %></h3>
-            <h3><%= totalPrice %></h3>
+            <h3 class="cart-total-quantity"><%= totalQuantity %></h3>
+            <h3 class="cart-total-price"><%= totalPrice %></h3>
           </div>
         </div>
         <div class="cart-controls">

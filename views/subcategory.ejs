@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
   </head>
   <body>
-    <!-- <h1><%= categoryName %></h1> -->
     <%- include('components/HomeNavBar') -%>
     <div class="categories">
       <% for (const subcategory of subcategories) { %>
@@ -16,12 +19,10 @@
           src="/images/<%= subcategory.image %>.jpg"
           alt="<%= subcategory.name %>"
         />
-        <!-- <h3><%= subcategory.name %></h3> -->
-        <a href="/c/<%= categoryName %>/<%= subcategory.name %>"
-          ><%= subcategory.name %></a
-        >
+        <a href="/c/<%= subcategory.name %>"><%= subcategory.name %></a>
       </div>
       <% } %>
     </div>
+    <script src="/js/categoryscript.js"></script>
   </body>
 </html>

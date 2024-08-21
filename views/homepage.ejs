@@ -52,44 +52,86 @@
           <% } %>
       </ul>
   </nav> -->
-    <div class="deals-section">
+    <!-- <div class="deals-section">
       <a href="/deals"><h2>Grab The Deals</h2></a>
-    </div>
-    <h1 class="side-heading">Browse By Categories.</h1>
-    <div class="categories">
-      <% if (Array.isArray(categories)) { %> <% categories.slice(0,
-      5).forEach(category => { %>
-      <div class="category-box">
-        <img
-          src="/images/<%= category.image %>.jpg"
-          alt="<%= category.name %>"
-        />
-        <!-- <h3><%= category.name %></h3> -->
-        <a href="/c/<%= category.name %>"><%= category.name %></a>
+    </div> -->
+    <%-include('components/HomeSaleBanner')-%>
+    <%-include('components/HomeSlider')-%>
+    <div class="categories-all">
+      <div class="upperheading">
+        <h2>Categories</h2>
       </div>
-      <% }) %> <% } else { %>
-      <p>No categories available</p>
-      <% } %>
-      <a href="/cat" class="see-all-btn">See All Categories</a>
+      <div class="section-text">
+        <h1 class="side-heading">
+          Discover the Latest Collections at Your Premier Online Shopping
+          Destination
+        </h1>
+      </div>
+      <div class="categories-explore">
+        <div class="categories">
+          <% if (Array.isArray(categories)) { %> <% categories.slice(0,
+          5).forEach(category => { %>
+          <div class="home-cat-box category-box">
+            <img
+              src="/images/<%= category.image %>.jpg"
+              alt="<%= category.name %>"
+            />
+            <!-- <h3><%= category.name %></h3> -->
+            <a href="/c/<%= category.name %>"><%= category.name %></a>
+          </div>
+          <% }) %> <% } else { %>
+          <p>No categories available</p>
+          <% } %>
+        </div>
+        <div class="see-all-btn-control">
+          <a href="/cat" class="see-all-btn">See All Categories</a>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="side-heading">Browse By Categories.</h1>
+    <div class="categories-explore">
+      <div class="categories">
+        <% if (Array.isArray(categories)) { %> <% categories.slice(0,
+        5).forEach(category => { %>
+        <div class="category-box">
+          <img
+            src="/images/<%= category.image %>.jpg"
+            alt="<%= category.name %>"
+          />
+          <!-- <h3><%= category.name %></h3> -->
+          <a href="/c/<%= category.name %>"><%= category.name %></a>
+        </div>
+        <% }) %> <% } else { %>
+        <p>No categories available</p>
+        <% } %>
+      </div>
+      <div class="see-all-btn-control">
+        <a href="/cat" class="see-all-btn">See All Categories</a>
+      </div>
     </div>
 
     <!-- Another Section -->
     <h1 class="side-heading">New Products.</h1>
-    <div class="categories">
-      <% if (Array.isArray(categories)) { %> <% categories.slice(0,
-      5).forEach(category => { %>
-      <div class="category-box">
-        <img
-          src="/images/<%= category.image %>.jpg"
-          alt="<%= category.name %>"
-        />
-        <!-- <h3><%= category.name %></h3> -->
-        <a href="/c/<%= category.name %>"><%= category.name %></a>
+    <div class="products-explore">
+      <div class="categories">
+        <% if (Array.isArray(categories)) { %> <% categories.slice(0,
+        5).forEach(category => { %>
+        <div class="category-box">
+          <img
+            src="/images/<%= category.image %>.jpg"
+            alt="<%= category.name %>"
+          />
+          <!-- <h3><%= category.name %></h3> -->
+          <a href="/c/<%= category.name %>"><%= category.name %></a>
+        </div>
+        <% }) %> <% } else { %>
+        <p>No categories available</p>
+        <% } %>
       </div>
-      <% }) %> <% } else { %>
-      <p>No categories available</p>
-      <% } %>
-      <a href="/categories" class="see-all-btn">See All Products</a>
+      <div class="see-all-btn-control">
+        <a href="/cat" class="see-all-btn">See All Categories</a>
+      </div>
     </div>
 
     <!-- Another Section -->
@@ -154,9 +196,9 @@
             <li><a href="/training">Training</a></li>
           </ul>
           <ul>
-            <li><a href="/categories">Categories</a></li>
-            <li><a href="/subcategories">SubCategories</a></li>
-            <li><a href="/products">Products</a></li>
+            <li><a href="/cat">Categories</a></li>
+            <li><a href="/sub">SubCategories</a></li>
+            <li><a href="/pro">Products</a></li>
           </ul>
           <ul>
             <li><a href="/auth/profile">Profile</a></li>

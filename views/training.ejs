@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Training Videos</title>
+    <link rel="stylesheet" href="/css/training.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="trainingpage">
+      <div>
+        <nav>
+          <div class="menu-icon">
+            <span class="fas fa-bars"></span>
+          </div>
+          <div class="logo">
+            Training<span style="color: green">Videos</span>
+          </div>
+          <div class="nav-items">
+            <li><a href="/">Home</a></li>
+            <li><a href="training/about">About</a></li>
+            <li><a href="training/book-session">Book Session</a></li>
+          </div>
+          <div class="search-icon">
+            <span class="fas fa-search"></span>
+          </div>
+          <div class="cancel-icon">
+            <span class="fas fa-times"></span>
+          </div>
+          <div class="search-box">
+            <input
+              class="search-data"
+              type="text"
+              id="input-box"
+              placeholder="Search Videos..."
+              autocomplete="off"
+            />
+            <button id="searchbutton" class="fas fa-search"></button>
+            <div class="result-box"></div>
+          </div>
+        </nav>
+      </div>
+      <div class="filters">
+        <div class="filter-group">
+          <label for="category">Category:</label>
+          <select name="category" id="category">
+            <option value="">All</option>
+            <% categories.forEach(category => { %>
+            <option value="<%= category.name %>"><%= category.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <!-- <div class="filter-group">
+            <label for="search">Search:</label>
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search by title"
+            />
+          </div> -->
+      </div>
+      <div class="videos-list">
+        <% trainingVideos.forEach(video => { %>
+        <div class="video-item" data-category="<%= video.category %>">
+          <div class="video-image">
+            <img src="<%= video.thumbnail %>" alt="Video Image" />
+          </div>
+          <div class="video-details">
+            <h2><%= video.title %></h2>
+            <a href="<%= video.url %>" target="_blank">Watch Video</a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <script src="/js/trainingscript.js"></script>
+    <script>
+      // Function to extract YouTube video ID from URL
+      function getVideoId(url) {
+        const regex =
+          /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+      }
+
+      // Function to add thumbnails to each video item
+      function addThumbnails() {
+        // Get all video items
+        const videoItems = document.querySelectorAll(".video-item");
+
+        // Loop through each video item
+        videoItems.forEach((videoItem) => {
+          // Get the URL of the video
+          const videoUrl = videoItem.querySelector("a").href; // Assuming the URL is in the <a> tag
+          const videoId = getVideoId(videoUrl);
+
+          if (videoId) {
+            // Construct the thumbnail URL
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+            // Get the video image container and set the image source
+            const videoImage = videoItem.querySelector(".video-image img");
+            videoImage.src = thumbnailUrl;
+            videoImage.alt = "YouTube Thumbnail";
+          } else {
+            // Handle case where videoId is not found (optional)
+            console.error("Invalid video URL:", videoUrl);
+          }
+        });
+      }
+      window.addEventListener("load", addThumbnails);
+    </script>
+  </body>
+</html>

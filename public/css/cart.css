@@ -31,27 +31,34 @@ h1 {
 /* Individual cart item styling */
 .cart-item {
   display: flex; /* Layout items side by side */
+  flex-direction: column;
   border: 1px solid #ddd; /* Light border for each cart item */
-  padding: 10px; /* Padding within each cart item */
+  padding: 20px; /* Padding within each cart item */
   border-radius: 5px; /* Rounded corners */
   background-color: white; /* White background */
   width: 60%;
-  height: 160px; /* Fixed width for each cart item */
-}
-/* Close button styling */
-.remove span {
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
-  transition: color 0.2s ease-in-out;
-  align-items: start;
 }
 
-.remove span:hover {
-  color: #555;
+.cart-item-main {
+  display: flex;
 }
+
+.cart-item-control {
+  display: flex;
+  justify-content: end;
+}
+
+.remove-item,
+.edit-item {
+  margin-right: 10px;
+  padding: 10px;
+  color: white;
+  background-color: blue;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
 /* Cart image styling */
 .cart-image {
   width: 150px; /* Fixed width for the image */
@@ -77,6 +84,45 @@ h1 {
 .cart-item-details p {
   margin: 6px 0; /* Reduced vertical margin */
 }
+
+/* Style for the input field */
+.quantity-input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+/* Style for the update button */
+.update-item {
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.update-item:hover {
+  background-color: #218838;
+}
+
+/* Style for the edit button when in cancel mode */
+.edit-item.cancel-mode {
+  background-color: #dc3545;
+  color: white;
+}
+
+.edit-item.cancel-mode:hover {
+  background-color: #c82333;
+}
+
+/* Ensure the edit-controls div is positioned correctly */
+.edit-controls {
+  margin-top: 10px;
+}
+
 cart-pricing {
   display: flex;
   flex-direction: column;
@@ -188,8 +234,6 @@ cart-pricing {
   }
   .cart-item {
     width: 100%;
-    flex-direction: row; /* Stack items vertically */
-    align-items: center; /* Center align */
   }
 
   .cart-item-details {

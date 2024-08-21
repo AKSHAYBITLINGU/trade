@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 var jwt = require("jsonwebtoken");
 const secretKey = process.env.JWT_SECRET_KEY;
+``;
 
 // Send OTP to user's phone
 const isValidPhoneNumber = (phone) => {

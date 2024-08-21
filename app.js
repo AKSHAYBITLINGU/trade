@@ -131,6 +131,8 @@ const usersFilePath = path.join(__dirname, "users.json");
 
 // Define routes (refer to separate files)
 const HomePageRouter = require("./routes/categories");
+const trainingPageRouter = require("./routes/training");
+const SubCatRouter = require("./routes/subcategories");
 const checkoutRouter = require("./routes/checkout");
 const uploadRouter = require("./routes/upload");
 const dealsRouter = require("./routes/deals");
@@ -146,6 +148,8 @@ const myordersRouter = require("./routes/myorders");
 const apidataRouter = require("./routes/apidata");
 
 app.use("/cat", HomePageRouter);
+app.use("/training", trainingPageRouter);
+app.use("/sub", SubCatRouter);
 app.use("/checkout", checkoutRouter);
 app.use("/upload", uploadRouter);
 app.use("/deals", dealsRouter);
